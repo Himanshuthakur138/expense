@@ -43,15 +43,15 @@ Navigate to your project directory and install the necessary npm packages:
 ## Project Scope
 The scope of the Expense Tracker includes:
 
-# Budget Management: 
+### Budget Management: 
 Users can set and adjust their monthly budgets.
-# Expense Tracking: 
+### Expense Tracking: 
 Users can log and categorize their expenditures.
-# Reporting Features:
+### Reporting Features:
 Provide visual insights into spending habits and budget adherence.
-# User Authentication: 
+### User Authentication: 
 Allow users to create accounts to save and manage their financial data securely.
-# Mobile Responsiveness:
+### Mobile Responsiveness:
 Ensure the application is accessible on various devices.
 
 By adhering to this scope, the Expense Tracker will serve as a powerful tool for users aiming to achieve better financial management and stability.
