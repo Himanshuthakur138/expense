@@ -18,7 +18,7 @@ Gain clarity on your financial flow
 * [Next js](https://nextjs.org/) - A React framework for server-side rendering and static site generation..
 * [MUI](https://mui.com/) - A comprehensive UI library.
 
-##Installation
+## Installation
 ## To set up this project, follow these steps:
 Install of framework and library
 For Next js 
@@ -41,6 +41,19 @@ Navigate to your project directory and install the necessary npm packages:
 ```
 
 ## Project Scope
-The Context API in React provides a powerful mechanism for sharing data across the component tree without the need for prop drilling. By leveraging context and context providers, developers can streamline state management, improve code maintainability, and enhance the scalability of React applications.
-##Conclusion
-Integrating the Context API into your Next.js application can significantly improve state management and component interaction. By following this guide, you can set up a scalable architecture that enhances maintainability and reusability in your projects. 
+The scope of the Expense Tracker includes:
+
+# Budget Management: 
+Users can set and adjust their monthly budgets.
+# Expense Tracking: 
+Users can log and categorize their expenditures.
+# Reporting Features:
+Provide visual insights into spending habits and budget adherence.
+# User Authentication: 
+Allow users to create accounts to save and manage their financial data securely.
+# Mobile Responsiveness:
+Ensure the application is accessible on various devices.
+
+By adhering to this scope, the Expense Tracker will serve as a powerful tool for users aiming to achieve better financial management and stability.
+## Conclusion
+The Expense Tracker provides a robust framework for managing your finances effectively. By integrating features such as budget management, expense tracking, and user authentication, this application empowers users to take control of their financial health.
