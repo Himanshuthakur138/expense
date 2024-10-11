@@ -7,10 +7,13 @@ finances more effectively but also empowers you to make informed decisions about
 or adjust your budget, ultimately leading to greater financial stability and peace of mind.
 
 By understanding your financial flow, you take an important step towards achieving your financial goals.
-## About Expence Tracker 
-The React Context API is a built-in feature that allows components to share data without manually passing props through each component. It's particularly useful for sharing data 
-like user authentication, themes, or language settings across an entire app. 
-For more detailed information and documentation, visit the [ContextApi Vercel](https://vercel.com/guides/react-context-state-management-nextjs).
+## About Expense Tracker
+The Expense Tracker helps you:
+
+Set a monthly budget
+Track expenditures against that budget
+Gain clarity on your financial flow
+
 ## Build with
 * [Next js](https://nextjs.org/) - A React framework for server-side rendering and static site generation..
 * [MUI](https://mui.com/) - A comprehensive UI library.
