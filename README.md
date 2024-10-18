@@ -57,3 +57,4 @@ Ensure the application is accessible on various devices.
 By adhering to this scope, the Expense Tracker will serve as a powerful tool for users aiming to achieve better financial management and stability.
 ## Conclusion
 The Expense Tracker provides a robust framework for managing your finances effectively. By integrating features such as budget management, expense tracking, and user authentication, this application empowers users to take control of their financial health.
+
