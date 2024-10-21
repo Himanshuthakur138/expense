@@ -32,8 +32,9 @@ const Login = () => {
       });
       if (res.error) {
         return errorMsg("Invalid credentials");
+        
       } else {
-        router.replace("/");
+        router.replace("/expense");
         return successMsg("Login Successfully");
       }
     } catch (error) {

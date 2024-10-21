@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { routesUrl } from "./utils/pagesurl";
-export const ProtectedRoutes = [routesUrl.products, routesUrl.table,routesUrl.expense];
+export const ProtectedRoutes = [ routesUrl.expense,];
 export const UnprotectedRoutes = [routesUrl.signIn];
 
 // Middleware function
