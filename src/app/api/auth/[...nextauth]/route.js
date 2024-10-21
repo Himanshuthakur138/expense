@@ -5,16 +5,8 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials) {
-        console.log("credentials",credentials)
-        // if (typeof window !== "undefined") {
-        //   const storeddata = JSON.parse(
-        //     window.localStorage.getItem("register")
-        //   );
-        //   console.log("sssssssssssssssssssssssssssssssssssssss", storeddata);
-        // }
         const { email, password, localData } = credentials;
         const data = JSON.parse(localData);
-        console.log("data", data);
         const user = data.find(
           (item) => item.email === email && item.password === password
         );

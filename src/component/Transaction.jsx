@@ -44,7 +44,7 @@ const Transaction = () => {
   const [deleteOpenModal, setDeleteOpenModal] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState();
   const [balanceInitialized, setBalanceInitialized] = useState(false);
-
+  const [remainingBalance, setRemaningBalance] = useState("0");
   useEffect(() => {
     if (totalbalance !== undefined) {
       setBalanceInitialized(true);
@@ -143,9 +143,13 @@ const Transaction = () => {
     const expense = calculateIncome("Expense");
     setTotalIncome(income);
     setTotalExpense(expense);
+    const remaining = totalbalance - totalExpense;
+    if (isNaN(remaining) ) {
+      setRemaningBalance("0");
+    } else {
+      setRemaningBalance(remaining);
+    }
   }, [data]);
-
-  const remainingBalance = totalbalance - totalExpense;
 
   const editBalance = (newBalance) => {
     setTotalBalance(newBalance);
@@ -353,7 +357,7 @@ const Transaction = () => {
               <Item
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
-                Remaining Balance: <span>$ {remainingBalance?.toFixed(2)}</span>
+                Remaining Balance: <span>$ {remainingBalance}</span>
               </Item>
             </Box>
           </Box>

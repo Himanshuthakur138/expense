@@ -59,6 +59,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-1imvrq
 .usericon{
   width: 6rem;
   height: 7rem;
+  color: #878686;
 }
 .field{
   width: 100px;
@@ -69,6 +70,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-1imvrq
 }
 .btn{
   font-size: 11px;
+
 }
 .imag{
   max-width: 50%;
