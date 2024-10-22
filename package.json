@@ -32,6 +32,7 @@
     "@mui/material": "^5.16.7",
     "@mui/x-data-grid": "^7.9.0",
     "@mui/x-date-pickers": "^7.19.0",
+    "@mui/x-date-pickers-pro": "latest",
     "@tabler/icons-react": "^3.10.0",
     "@tiptap/extension-link": "^2.4.0",
     "@tiptap/react": "^2.4.0",

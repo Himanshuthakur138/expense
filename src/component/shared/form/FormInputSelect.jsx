@@ -13,14 +13,15 @@ const FormInputSelect = ({
 }) => {
   return (
     <>
-      <FormControl fullWidth error={!!errors?.[name]}>
-        <InputLabel className="field mt-4 ">{label}</InputLabel>
+      <FormControl fullWidth>
+        <InputLabel className="field ">{label}</InputLabel>
         <Controller
           name={name}
           control={control}
           defaultValue={defaultValue || ""}
           render={({ field }) => (
             <Select
+            InputLabelProps={{ shrink: true }}
               label={label}
               id={name}
               className={className}

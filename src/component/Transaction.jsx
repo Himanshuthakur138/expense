@@ -8,6 +8,7 @@ import {
   Grid,
   Modal,
   Paper,
+  TextField,
   Typography,
 } from "@mui/material";
 import React, { useState, useEffect, useContext } from "react";
@@ -26,6 +27,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { styled } from "@mui/material/styles";
 import DeleteModal from "./modal/DeleteModal";
 import UserContext from "@/context/UserContext";
+import dayjs from "dayjs";
 const Transaction = () => {
   const {
     control,
@@ -42,9 +44,9 @@ const Transaction = () => {
   const [totalExpense, setTotalExpense] = useState(0);
   const [editIndex, setEditIndex] = useState(null);
   const [deleteOpenModal, setDeleteOpenModal] = useState(false);
-  const [deleteIndex, setDeleteIndex] = useState();
+  const [deleteIndex, setDeleteIndex] = useState(null);
   const [balanceInitialized, setBalanceInitialized] = useState(false);
-  const [remainingBalance, setRemaningBalance] = useState("0");
+
   useEffect(() => {
     if (totalbalance !== undefined) {
       setBalanceInitialized(true);
@@ -65,6 +67,8 @@ const Transaction = () => {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
+    maxHeight: "80vh",
+    overflowY: "auto",
   };
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -109,11 +113,18 @@ const Transaction = () => {
     setOpen(false);
   };
   const onDelete = () => {
-    const updatedData = data.filter((_, i) => i !== deleteIndex);
-    localStorage.setItem("expense", JSON.stringify(updatedData));
-    setData(updatedData);
-    successMsg("Transaction deleted successfully");
-    setDeleteOpenModal(false);
+    if (deleteIndex !== null) {
+      const updatedData = data.filter((_, i) => i !== deleteIndex);
+      localStorage.setItem("expense", JSON.stringify(updatedData));
+      setData(updatedData);
+      successMsg("Transaction deleted successfully");
+      setDeleteOpenModal(false);
+      setDeleteIndex(null)
+    } else {
+      const remove = localStorage.removeItem("balance");
+      setTotalBalance(remove);
+      setDeleteOpenModal(false);
+    }
   };
   const handleDelete = (index) => {
     setDeleteIndex(index);
@@ -143,14 +154,9 @@ const Transaction = () => {
     const expense = calculateIncome("Expense");
     setTotalIncome(income);
     setTotalExpense(expense);
-    const remaining = totalbalance - totalExpense;
-    if (isNaN(remaining) ) {
-      setRemaningBalance("0");
-    } else {
-      setRemaningBalance(remaining);
-    }
   }, [data]);
 
+  const remainingBalance = totalbalance - totalExpense;
   const editBalance = (newBalance) => {
     setTotalBalance(newBalance);
     localStorage.setItem("balance", newBalance);
@@ -168,8 +174,7 @@ const Transaction = () => {
     setEditBalanceOpen(false);
   };
   const handleDeleteBalance = () => {
-    const remove = localStorage.removeItem("balance");
-    setTotalBalance(remove);
+    setDeleteOpenModal(true);
   };
   const handleCloseBalance = () => {
     setOpen(false);
@@ -193,7 +198,7 @@ const Transaction = () => {
                 <br />
                 <Sheet
                   sx={{
-                    width: 550,
+                    width: 500,
                     mx: "auto",
                     my: 4,
                     py: 3,
@@ -208,11 +213,10 @@ const Transaction = () => {
                 >
                   <form onSubmit={handleSubmit(onSubmit)}>
                     <>
-                      <FormControl>
+                      <FormControl fullWidth margin="normal" className="mt-4  ">
                         <FormInput
                           control={control}
                           name="title"
-                          className="mt-4 ml-2"
                           label="Title"
                           placeholder="Title"
                           inputType="text"
@@ -220,11 +224,11 @@ const Transaction = () => {
                           errors={errors}
                         />
                       </FormControl>
-                      <FormControl>
+
+                      <FormControl fullWidth margin="normal" className="mt-4  ">
                         <FormInput
                           control={control}
                           name="amount"
-                          className="mt-4 ml-2"
                           label="Amount"
                           placeholder="Amount"
                           inputType="number"
@@ -233,38 +237,39 @@ const Transaction = () => {
                           errors={errors}
                         />
                       </FormControl>
-                      <FormControl>
+
+                      <FormControl fullWidth margin="normal" className="  ">
                         <FormInputSelect
                           control={control}
                           name="type"
-                          className=" mt-4 ml-2 field"
                           label="Select Type"
                           options={["Income", "Expense"]}
                           errors={errors}
                         />
                       </FormControl>
-                      <FormControl>
+
+                      <FormControl fullWidth margin="normal" className="mt-4  ">
                         <DateSelect
                           control={control}
                           name="date"
-                          className="mt-4 ml-2"
                           label="Select Date"
                           errors={errors}
+                          defaultValue={dayjs(new Date())}
                         />
                       </FormControl>
-                      <FormControl>
+
+                      <FormControl fullWidth margin="normal" className="mt-4  ">
                         <FormInput
                           control={control}
                           errors={errors}
                           name="description"
-                          className="mt-4  ml-2"
                           label="Description"
                           placeholder="Description"
                           inputType="text"
                           id="description"
                         />
                       </FormControl>
-                      <br />
+
                       <Button
                         className="mt-4 ml-2 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
                         type="submit"
@@ -282,10 +287,20 @@ const Transaction = () => {
             </Modal>
             <Modal open={editBalanceOpen} onClose={handleEditBalanceClose}>
               <Box sx={style}>
-                <Typography variant="h6">Edit Balance</Typography>
-                <input
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  Edit Balance{" "}
+                  <span>
+                    {" "}
+                    <CloseIcon onClick={handleEditBalanceClose} />
+                  </span>
+                </div>
+                <TextField
                   type="number"
                   value={newBalance}
+                  variant="outlined"
+                  className="w-80"
                   min="0"
                   onChange={(e) => setNewBalance(parseFloat(e.target.value))}
                 />
@@ -305,6 +320,13 @@ const Transaction = () => {
         ) : (
           <Modal open={open} onClose={handleCloseBalance}>
             <Box sx={style}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                Set Balance{" "}
+                <span>
+                  {" "}
+                  <CloseIcon onClick={handleClose} />
+                </span>
+              </div>
               <SetBalance totalExpense={totalExpense} setOpen={setOpen} />
             </Box>
           </Modal>
@@ -357,7 +379,8 @@ const Transaction = () => {
               <Item
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
-                Remaining Balance: <span>$ {remainingBalance}</span>
+                Remaining Balance:{" "}
+                <span>$ {isNaN(remainingBalance) ? 0 : remainingBalance}</span>
               </Item>
             </Box>
           </Box>

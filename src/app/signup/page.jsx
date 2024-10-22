@@ -5,7 +5,7 @@ import { Sheet } from "@mui/joy";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useLocalStorage from "use-local-storage";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Button, Typography } from "@mui/material";
 import { signIn } from "next-auth/react";
 import { signupValidation } from "@/component/validation/signupValidation";
@@ -42,7 +42,7 @@ const SignUpform = () => {
         const storedData = [...data, registeruser];
         setData(storedData);
         setUser(registeruser);
-        successMsg("User register successfully");
+        successMsg("User registered successfully");
       } catch (error) {
         errorMsg("An error occurred while saving data:", error);
       }
@@ -90,7 +90,7 @@ const SignUpform = () => {
           </div>
           <div className="w-1/2">
             <Sheet
-               sx={{
+              sx={{
                 mx: "auto",
                 my: 5,
                 py: 5,
@@ -100,10 +100,7 @@ const SignUpform = () => {
                 gap: 2,
               }}
             >
-              <form onSubmit={handleSubmit(onSubmit)} className="w-80 ml-2">
-                <div className="icon">
-                  <AccountCircleIcon fontSize="large" className="usericon" />
-                </div>
+              <form onSubmit={handleSubmit(onSubmit)} className="text-center">
                 <div>
                   <Typography variant="h4" className="text-center">
                     <b>Register User</b>
@@ -116,7 +113,7 @@ const SignUpform = () => {
                   <span className="ml-2">
                     {" "}
                     <Link href="/auth/signin" className="text-blue-600">
-                      SignIn
+                      Sign In
                     </Link>
                   </span>
                 </p>
