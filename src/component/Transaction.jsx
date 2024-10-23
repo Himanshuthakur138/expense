@@ -17,8 +17,6 @@ import useLocalStorage from "use-local-storage";
 import FormInput from "./shared/form/formData";
 import FormInputSelect from "./shared/form/FormInputSelect";
 import DateSelect from "./shared/form/DatePicker";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { transactionValidation } from "./validation/transactionValidation";
 import SetBalance from "./SetBalance";
 import TransactionTable from "./Table/TransactionTable";
 import { successMsg } from "./Toastmsg/toaster";
@@ -28,6 +26,8 @@ import { styled } from "@mui/material/styles";
 import DeleteModal from "./modal/DeleteModal";
 import UserContext from "@/context/UserContext";
 import dayjs from "dayjs";
+import { transactionValidation } from "./validation/transactionValidation";
+import { yupResolver } from "@hookform/resolvers/yup";
 const Transaction = () => {
   const {
     control,
@@ -35,6 +35,7 @@ const Transaction = () => {
     reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(transactionValidation) });
+  console.log("errorswwwwwwwwwwwww", errors);
   const { totalbalance, setTotalBalance } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [editBalanceOpen, setEditBalanceOpen] = useState(false);
@@ -119,7 +120,7 @@ const Transaction = () => {
       setData(updatedData);
       successMsg("Transaction deleted successfully");
       setDeleteOpenModal(false);
-      setDeleteIndex(null)
+      setDeleteIndex(null);
     } else {
       const remove = localStorage.removeItem("balance");
       setTotalBalance(remove);
@@ -246,6 +247,7 @@ const Transaction = () => {
                           options={["Income", "Expense"]}
                           errors={errors}
                         />
+                        <p className="help">{errors?.type?.message}</p>
                       </FormControl>
 
                       <FormControl fullWidth margin="normal" className="mt-4  ">

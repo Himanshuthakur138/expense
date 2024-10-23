@@ -3,6 +3,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Controller } from "react-hook-form";
+import dayjs from "dayjs";
+import FormHelperText from "@mui/material/FormHelperText";
 export default function DateSelect({
   name,
   control,
@@ -20,22 +22,23 @@ export default function DateSelect({
         <Controller
           name={name}
           control={control}
-          defaultValue={defaultValue}
-          render={({ field, fieldState }) => (
+          defaultValue={null}
+          rules={{ required: true }}
+          render={({ field, fieldState: { error } }) => (
             <DatePicker
               {...field}
               className={className}
               label={label}
-              value={value}
+              value={value || field.value}
               placeholder={placeholder}
               onChange={(date) => {
                 field.onChange(date);
               }}
               renderInput={(params) => (
+                // defaultValue={defaultValue || dayjs(new Date())}
                 <TextField
-                {...params}
+                  {...params}
                   InputLabelProps={{ shrink: true }}
-                  defaultValue={dayjs(new Date())}
                   error={!!errors?.[name]}
                   helperText={errors?.[name]?.message}
                 />
@@ -44,6 +47,11 @@ export default function DateSelect({
           )}
         />
       </LocalizationProvider>
+      <FormHelperText
+        className="help1"
+      >
+        {errors?.[name]?.message}
+      </FormHelperText>
     </FormControl>
   );
 }

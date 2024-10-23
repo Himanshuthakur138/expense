@@ -26,7 +26,7 @@ const FormInputSelect = ({
               id={name}
               className={className}
               {...field}
-              error={!!errors?.[name]}
+              error={!!errors?.[name]}                                 
               helperText={errors?.[name]?.message}
             >
               {options.map((option, index) => (
