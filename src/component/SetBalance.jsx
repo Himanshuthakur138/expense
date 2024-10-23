@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { balanceValidation } from "./validation/balanceValidation";
 import UserContext from "@/context/UserContext";
+import { successMsg } from "./Toastmsg/toaster";
 
 const SetBalance = ({setOpen}) => {
   const {
@@ -19,6 +20,7 @@ const SetBalance = ({setOpen}) => {
     setTotalBalance(storedData);
     reset();
     setOpen(false)
+    successMsg("Balance added successfully")
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

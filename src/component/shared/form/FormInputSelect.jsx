@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from "@mui/material";
 import { Controller } from "react-hook-form";
 
 const FormInputSelect = ({
@@ -21,12 +21,12 @@ const FormInputSelect = ({
           defaultValue={defaultValue || ""}
           render={({ field }) => (
             <Select
-            InputLabelProps={{ shrink: true }}
+              InputLabelProps={{ shrink: true }}
               label={label}
               id={name}
               className={className}
               {...field}
-              error={!!errors?.[name]}                                 
+              error={!!errors?.[name]}
               helperText={errors?.[name]?.message}
             >
               {options.map((option, index) => (
@@ -37,7 +37,9 @@ const FormInputSelect = ({
             </Select>
           )}
         />
-      
+        <FormHelperText error className="help">
+          {errors?.[name]?.message}
+        </FormHelperText>
       </FormControl>
     </>
   );

@@ -1,57 +1,72 @@
-import { FormControl, TextField } from "@mui/material";
+import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import React, { useState } from "react";
 import { Controller } from "react-hook-form";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { InputAdornment } from "@mui/material";
 import dayjs from "dayjs";
-import FormHelperText from "@mui/material/FormHelperText";
-export default function DateSelect({
+const DateSelect = ({
   name,
   control,
   label,
-  className,
-  placeholder,
-  value,
+  inputFormat,
   errors,
-  defaultValue,
-}) {
-  console.log("errors", errors?.[name]?.message);
+  value,
+  className,
+}) => {
+  const [isDatePickerOpen, setDatePickerOpen] = useState(false);
+
   return (
-    <FormControl fullWidth>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <>
+      <div>
         <Controller
           name={name}
           control={control}
-          defaultValue={null}
-          rules={{ required: true }}
-          render={({ field, fieldState: { error } }) => (
-            <DatePicker
-              {...field}
-              className={className}
-              label={label}
-              value={value || field.value}
-              placeholder={placeholder}
-              onChange={(date) => {
-                field.onChange(date);
-              }}
-              renderInput={(params) => (
-                // defaultValue={defaultValue || dayjs(new Date())}
-                <TextField
-                  {...params}
-                  InputLabelProps={{ shrink: true }}
-                  error={!!errors?.[name]}
-                  helperText={errors?.[name]?.message}
-                />
-              )}
-            />
+          value={value}
+          defaultValue={dayjs(new Date())}
+          render={({ field: { onChange, value } }) => (
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <MobileDatePicker
+                inputFormat={inputFormat}
+                label={label}
+                open={isDatePickerOpen}
+                onClose={() => setDatePickerOpen(false)}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <DateRangeIcon
+                        className="cursor-pointer"
+                        onClick={() => setDatePickerOpen(!isDatePickerOpen)}
+                      />
+                    </InputAdornment>
+                  ),
+                }}
+                value={value || null}
+                onChange={(newValue) => {
+                  onChange(newValue || value);
+                  setDatePickerOpen(false);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    error={!!errors?.[name]}
+                    helperText={errors?.[name]?.message}
+                    placeholder="YYYY-MM-DD"
+                    className={className}
+                    fullWidth
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                )}
+              />
+            </LocalizationProvider>
           )}
         />
-      </LocalizationProvider>
-      <FormHelperText
-        className="help1"
-      >
-        {errors?.[name]?.message}
-      </FormHelperText>
-    </FormControl>
+      </div>
+    </>
   );
-}
+};
+export default DateSelect;

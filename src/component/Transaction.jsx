@@ -35,7 +35,6 @@ const Transaction = () => {
     reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(transactionValidation) });
-  console.log("errorswwwwwwwwwwwww", errors);
   const { totalbalance, setTotalBalance } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [editBalanceOpen, setEditBalanceOpen] = useState(false);
@@ -124,6 +123,7 @@ const Transaction = () => {
     } else {
       const remove = localStorage.removeItem("balance");
       setTotalBalance(remove);
+      successMsg("Balance deleted successfully")
       setDeleteOpenModal(false);
     }
   };
@@ -247,16 +247,17 @@ const Transaction = () => {
                           options={["Income", "Expense"]}
                           errors={errors}
                         />
-                        <p className="help">{errors?.type?.message}</p>
                       </FormControl>
 
                       <FormControl fullWidth margin="normal" className="mt-4  ">
                         <DateSelect
-                          control={control}
+                          className="shadow-lg relative"
                           name="date"
-                          label="Select Date"
+                          control={control}
                           errors={errors}
-                          defaultValue={dayjs(new Date())}
+                          required={true}
+                          label="Date"
+                          inputFormat="YYYY-MM-DD"
                         />
                       </FormControl>
 
@@ -303,7 +304,7 @@ const Transaction = () => {
                   value={newBalance}
                   variant="outlined"
                   className="w-80"
-                  min="0"
+                  inputProps={{ min: 0 }} 
                   onChange={(e) => setNewBalance(parseFloat(e.target.value))}
                 />
                 <br />

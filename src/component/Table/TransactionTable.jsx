@@ -96,15 +96,18 @@ const TransactionTable = ({ data, handleDelete, handleEdit }) => {
                       </Tooltip>
                     </TableCell>
                     <TableCell>
-                      <DeleteIcon
+                   <Tooltip title="Delete transaction" className="cursor-pointer">   
+                   <DeleteIcon
                         className="deleteicontable"
                         onClick={() => handleDelete(index)}
                       />
-
-                      <EditIcon
+                   </Tooltip>
+                    <Tooltip title="Edit transaction" className="cursor-pointer">
+                    <EditIcon
                         className="editicontable"
                         onClick={() => handleEdit(index)}
                       />
+                    </Tooltip>
                     </TableCell>
                   </TableRow>
                 ))

@@ -5,8 +5,7 @@ export const transactionValidation = Yup.object().shape({
   amount: Yup.string().required("Amount is required"),
 
   date: Yup.date()
-  .required("Date is required")
-  .max(new Date(), "Date cannot be in the future"),
+  .required("Date is required"),
   type: Yup.string().required("Type is required"),
   description: Yup.string()
     .required("Description is required")

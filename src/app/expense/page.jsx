@@ -8,15 +8,18 @@ import TabPanel from "@mui/lab/TabPanel";
 import Expense from "@/component/Expense";
 import Income from "@/component/Income";
 import Transaction from "@/component/Transaction";
+import ExpenseDesign from "@/component/ExpenseDesign/ExpenseDesign";
 
 const ExpenseData = () => {
   const [value, setValue] = React.useState("1");
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
     <>
+
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -26,6 +29,9 @@ const ExpenseData = () => {
               <Tab label="Expense" value="3" />
             </TabList>
           </Box>
+          <br/>
+      <ExpenseDesign />
+
           <TabPanel value="1">
             <Transaction />
           </TabPanel>

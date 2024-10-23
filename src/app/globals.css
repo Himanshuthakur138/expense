@@ -79,12 +79,20 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-1imvrq
   display: flex;
   justify-content: center;
 }
+
 .help{
-  font-size: 0.75rem;
-  margin-left: 14px;
   color: #d32f2f;
-  margin-top: 3px;
 }
-.help1{
-  color: #d32f2f;
+.mar{
+  margin-top: 5%;
+  font-size: x-large;
+  margin-left: 6%;
+}
+.des{
+  background-color: #ffd9d9;
+    border: 1px solid white;
+    border-top-right-radius: 85%;
+    border-bottom-left-radius: 58%;
+    border-top-left-radius: 5%;
+    border-bottom-right-radius: 5%
 }
